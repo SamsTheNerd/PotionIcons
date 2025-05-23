@@ -1,0 +1,29 @@
+architectury {
+    common rootProject.enabled_platforms.split(',')
+}
+
+archivesBaseName = "${archivesBaseName}-common"
+
+dependencies {
+    // We depend on Fabric Loader here to use the Fabric @Environment annotations,
+    // which get remapped to the correct annotations on each platform.
+    // Do NOT use other classes from Fabric Loader.
+    modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
+
+    modApi "com.samsthenerd.inline:inline-common:${project.inline_version}"
+}
+
+publishing {
+    publications {
+        mavenCommon(MavenPublication) {
+            artifactId = archivesBaseName
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            url System.getenv("local_maven_url")
+        }
+    }
+}
