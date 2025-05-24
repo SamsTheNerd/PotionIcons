@@ -47,6 +47,7 @@ public class EffectInlineData implements InlineData<EffectInlineData> {
     }
 
     public Text addIconToPotionTooltip(Text t){
+        if(!PotionIconsModClient.getConfig().showInTooltip) return t;
         MutableText effText = t.copy();
         Text iconText = this.asText(false).copy().styled(sty -> InlineAPI.INSTANCE.withSizeModifier(sty, 1.25));
         return Text.empty().append(iconText.copy()).append(" ").append(effText);

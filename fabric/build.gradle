@@ -37,6 +37,10 @@ dependencies {
     shadowBundle project(path: ':common', configuration: 'transformProductionFabric')
 
     modApi "com.samsthenerd.inline:inline-fabric:${project.inline_version}"
+
+    modCompileOnly ("com.terraformersmc:modmenu:${mod_menu_version}"){
+        transitive(false)
+    }
 }
 
 processResources {

@@ -1,17 +1,17 @@
 modLoader = "javafml"
 loaderVersion = "[4,)"
-#issueTrackerURL = ""
-license = "Insert License Here"
+issueTrackerURL = "https://github.com/SamsTheNerd/PotionIcons/issues"
+license = "LGPL-3.0"
 
 [[mods]]
 modId = "potionicons"
 version = "${version}"
 displayName = "Potion Icons"
-authors = "Me!"
+authors = "samsthenerd"
 description = '''
-This is an example description! Tell everyone what your mod is about!
+Putting effect icons in more places.
 '''
-#logoFile = ""
+logoFile = "assets/potionicons/icon.png"
 
 [[dependencies.potionicons]]
 modId = "neoforge"
@@ -24,6 +24,14 @@ side = "BOTH"
 modId = "minecraft"
 type = "required"
 versionRange = "[1.21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+
+[[dependencies.potionicons]]
+modId = "inline"
+type = "required"
+versionRange = "[1.21.1-1.2.2,)"
 ordering = "NONE"
 side = "BOTH"
 
