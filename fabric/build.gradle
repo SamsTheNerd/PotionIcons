@@ -97,6 +97,9 @@ publishMods {
         requires{
             slug = "cloth-config"
         }
+        requires{
+            slug = "inline"
+        }
     }
 
     modrinth {
@@ -110,32 +113,37 @@ publishMods {
         requires{
             slug = "cloth-config"
         }
-    }
-
-    github {
-        accessToken = System.getenv("GITHUB_TOKEN") ?: ""
-        repository = System.getenv("GITHUB_REPOSITORY") ?: ""
-        commitish = System.getenv("GIT_COMMIT") ?: ""
-        tagName = "release/${project.version}"
-    }
-}
-
-tasks {
-    publishGithub {
-        dependsOn(
-                project(":common").tasks.remapJar,
-                project(":neoforge").tasks.remapJar,
-        )
-
-        // we need to do this here so that it waits until Forge is already configured
-        // otherwise tasks.remapJar doesn't exist yet
-        publishMods {
-            github {
-                additionalFiles.from(
-                        project(":common").tasks.remapJar.archiveFile,
-                        project(":neoforge").tasks.remapJar.archiveFile,
-                )
-            }
+        requires{
+            slug = "inline"
         }
     }
+
+//    github {
+//        accessToken = System.getenv("GITHUB_TOKEN") ?: ""
+//        repository = System.getenv("GITHUB_REPOSITORY") ?: ""
+//        commitish = System.getenv("GIT_COMMIT") ?: ""
+//        tagName = "release/${project.version}"
+//    }
 }
+
+//tasks {
+//    publishGithub {
+//        dependsOn(
+//                project(":common").tasks.remapJar,
+//                project(":neoforge").tasks.remapJar,
+//        )
+//
+//        // we need to do this here so that it waits until Forge is already configured
+//        // otherwise tasks.remapJar doesn't exist yet
+//        publishMods {
+//            github {
+//                displayName = "Potion Icons" + " " + project.version
+//
+//                additionalFiles.from(
+//                        project(":common").tasks.remapJar.archiveFile,
+//                        project(":neoforge").tasks.remapJar.archiveFile,
+//                )
+//            }
+//        }
+//    }
+//}

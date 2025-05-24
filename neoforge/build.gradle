@@ -93,6 +93,9 @@ publishMods {
         minecraftVersions.add(project.minecraft_version)
 
         requires{
+            slug = "inline"
+        }
+        requires{
             slug = "cloth-config"
         }
     }
@@ -102,6 +105,9 @@ publishMods {
         projectId = project.potionicons_modrinth_slug
         minecraftVersions.add(project.minecraft_version)
 
+        requires{
+            slug = "inline"
+        }
         requires{
             slug = "cloth-config"
         }
