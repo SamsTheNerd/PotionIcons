@@ -20,5 +20,22 @@
   "text.autoconfig.potionicons.option.shiftFront": "Shift in Front",
   "text.autoconfig.potionicons.option.shiftFront.@Tooltip": "If the effect icons are rendered in front of or behind the item when holding shift.",
 
-  "text.autoconfig.potionicons.option.showInTooltip": "Show Icon in Potion Tooltip"
+  "text.autoconfig.potionicons.option.cycleSpeedNormal": "Normal Cycle Speed",
+  "text.autoconfig.potionicons.option.cycleSpeedNormal.@Tooltip": "Seconds between rotation for potions with multiple effects when not holding shift.",
+
+
+  "text.autoconfig.potionicons.option.cycleSpeedShift": "Shift Cycle Speed",
+  "text.autoconfig.potionicons.option.cycleSpeedShift.@Tooltip": "Seconds between rotation for potions with multiple effects when holding shift.",
+
+  "text.autoconfig.potionicons.option.showInTooltip": "Show Icon in Potion Tooltip",
+
+  "matcher.potionicons.effect.title": "Effect Icon",
+  "matcher.potionicons.effect.title.styled": "Effect Icon [effect:fire_resistance]",
+  "matcher.potionicons.effect.description": "Displays an effect icon",
+  "matcher.potionicons.effect.example": "[effect:fire_resistance]",
+
+  "matcher.potionicons.potion.title": "Potion",
+  "matcher.potionicons.potion.title.styled": "Potion [potion:fire_resistance]",
+  "matcher.potionicons.potion.description": "Displays a potion item.",
+  "matcher.potionicons.potion.example": "[potion:fire_resistance]"
 }

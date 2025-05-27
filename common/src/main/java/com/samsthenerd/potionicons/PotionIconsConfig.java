@@ -2,6 +2,7 @@ package com.samsthenerd.potionicons;
 
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
+import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.autoconfig.annotation.ConfigEntry.Gui.EnumHandler;
 import me.shedaniel.autoconfig.annotation.ConfigEntry.Gui.EnumHandler.EnumDisplayOption;
 import me.shedaniel.autoconfig.annotation.ConfigEntry.Gui.Tooltip;
@@ -29,7 +30,11 @@ public class PotionIconsConfig implements ConfigData {
     @Tooltip()
     public boolean shiftFront = true;
 
+    @Tooltip()
+    public double cycleSpeedNormal = 0;
+
+    @Tooltip()
+    public double cycleSpeedShift = 0;
+
     public boolean showInTooltip = true;
-
-
 }
