@@ -32,13 +32,13 @@ public class PotionOverlayRenderer implements ItemOverlayRenderer {
             Spritelike effectSpritelike = SpritelikeUtils.spritelikeFromSprite(effectSprite);
             if(mode == PIRenderMode.FULL){
                 SpritelikeRenderers.getRenderer(effectSpritelike).drawSprite(effectSpritelike, drawContext, 0, 0,
-                    100+i, 16, 16);
+                    i, 16, 16);
             } else if(mode == PIRenderMode.TOP_LEFT || (mode == PIRenderMode.TRY_BOTTOM_RIGHT && stack.getMaxCount() > 1)){
                 SpritelikeRenderers.getRenderer(effectSpritelike).drawSprite(effectSpritelike, drawContext, 2*i, 2*i,
-                    100+i, 9, 9);
+                    i, 9, 9);
             } else if(mode == PIRenderMode.TRY_BOTTOM_RIGHT){
                 SpritelikeRenderers.getRenderer(effectSpritelike).drawSprite(effectSpritelike, drawContext, 7-2*i, 7-2*i,
-                    100+i, 9, 9);
+                    i, 9, 9);
             }
             i++;
         }
