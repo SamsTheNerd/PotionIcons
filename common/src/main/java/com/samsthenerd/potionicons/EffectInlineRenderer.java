@@ -24,7 +24,7 @@ public class EffectInlineRenderer implements InlineRenderer<EffectInlineData> {
 
     @Override
     public int render(EffectInlineData data, DrawContext context, int index, Style style, int codepoint, TextRenderingContext trContext) {
-        var effect = new StatusEffectInstance(data.getEffect());
+        var effect = new StatusEffectInstance(data.getEffect().value());
         var effectSprite = MinecraftClient.getInstance().getStatusEffectSpriteManager().getSprite(effect.getEffectType());
         Spritelike effectSpritelike = SpritelikeUtils.spritelikeFromSprite(effectSprite);
         SpritelikeRenderers.getRenderer(effectSpritelike).drawSpriteWithLight(effectSpritelike, context, 0, 0,
@@ -39,6 +39,6 @@ public class EffectInlineRenderer implements InlineRenderer<EffectInlineData> {
 
     @Override
     public GlowHandling getGlowPreference(EffectInlineData forData){
-        return new GlowHandling.Full(forData.getEffect().getIdAsString().replace(':', '-'));
+        return new GlowHandling.Full(forData.getEffect().value().getTranslationKey().replace(':', '-').toLowerCase());
     }
 }

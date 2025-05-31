@@ -8,12 +8,14 @@ import com.samsthenerd.inline.tooltips.CustomTooltipManager;
 import com.samsthenerd.inline.tooltips.providers.ModDataTTProvider;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.HoverEvent;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
 
 public class EffectInlineData implements InlineData<EffectInlineData> {
 
@@ -21,6 +23,14 @@ public class EffectInlineData implements InlineData<EffectInlineData> {
 
     public EffectInlineData(RegistryEntry<StatusEffect> effect){
         this.effect = effect;
+    }
+
+    @Nullable
+    public static EffectInlineData fromIdentifier(Identifier id){
+        var optEff = Registries.STATUS_EFFECT.getOrEmpty(id).map(Registries.STATUS_EFFECT::getEntry);
+        if(optEff.isEmpty()) return null;
+        var effect = optEff.get();
+        return new EffectInlineData(effect);
     }
 
     public RegistryEntry<StatusEffect> getEffect(){
@@ -63,7 +73,7 @@ public class EffectInlineData implements InlineData<EffectInlineData> {
 
         @Override
         public Codec<EffectInlineData> getCodec(){
-            return StatusEffect.ENTRY_CODEC.xmap(
+            return Registries.STATUS_EFFECT.createEntryCodec().xmap(
                 EffectInlineData::new, EffectInlineData::getEffect
             );
         }

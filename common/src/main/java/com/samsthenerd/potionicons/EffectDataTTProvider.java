@@ -10,10 +10,11 @@ import com.samsthenerd.inline.utils.Spritelike;
 import com.samsthenerd.inline.utils.SpritelikeUtils;
 import com.samsthenerd.inline.xplat.IModMeta;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.item.TooltipData;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.item.tooltip.TooltipData;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
@@ -73,7 +74,7 @@ public class EffectDataTTProvider implements CustomTooltipProvider<RegistryEntry
     @NotNull
     public Optional<TooltipData> getTooltipData(RegistryEntry<StatusEffect> effectEntry){
         var effect = effectEntry.value();
-        var effectSprite = MinecraftClient.getInstance().getStatusEffectSpriteManager().getSprite(effectEntry);
+        var effectSprite = MinecraftClient.getInstance().getStatusEffectSpriteManager().getSprite(effectEntry.value());
         Spritelike effectSpritelike = SpritelikeUtils.spritelikeFromSprite(effectSprite);
         return Optional.of(new SpriteTooltipData(effectSpritelike, (w, h) -> 32));
     }
@@ -81,6 +82,6 @@ public class EffectDataTTProvider implements CustomTooltipProvider<RegistryEntry
     @Override
     @NotNull
     public Codec<RegistryEntry<StatusEffect>> getCodec(){
-        return StatusEffect.ENTRY_CODEC;
+        return Registries.STATUS_EFFECT.createEntryCodec();
     }
 }

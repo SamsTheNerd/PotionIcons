@@ -10,10 +10,8 @@ import com.samsthenerd.inline.api.matching.RegexMatcher;
 import com.samsthenerd.inline.api.matching.RegexMatcher.Standard;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.item.Items;
-import net.minecraft.item.PotionItem;
+import net.minecraft.potion.PotionUtil;
 import net.minecraft.registry.Registries;
 import net.minecraft.text.HoverEvent;
 import net.minecraft.text.HoverEvent.ItemStackContent;
@@ -34,23 +32,21 @@ public class PotionIconsModClient {
         Identifier effectMatcherID = PotionIconsMod.id( "effect");
         InlineClientAPI.INSTANCE.addMatcher(new RegexMatcher.Standard("effect", Standard.IDENTIFIER_REGEX_INSENSITIVE, effectMatcherID,
             (String effectId) ->{
-                Identifier effActualId = Identifier.of(effectId.toLowerCase());
-                var optEff = Registries.STATUS_EFFECT.getEntry(effActualId);
-                if(optEff.isEmpty()) return null;
-                var effect = optEff.get();
-                var effData = new EffectInlineData(effect);
+                Identifier effActualId = new Identifier(effectId.toLowerCase());
+                var effData = EffectInlineData.fromIdentifier(effActualId);
+                if(effData == null) return null;
                 return new DataMatch(effData, effData.getExtraStyle());
             }, MatcherInfo.fromId(effectMatcherID)));
 
         Identifier potionMatcherID = PotionIconsMod.id( "potion");
         InlineClientAPI.INSTANCE.addMatcher(new RegexMatcher.Standard("potion", Standard.IDENTIFIER_REGEX_INSENSITIVE, potionMatcherID,
             (String potionId) ->{
-                Identifier potActualId = Identifier.of(potionId.toLowerCase());
-                var optPot = Registries.POTION.getEntry(potActualId);
+                Identifier potActualId = new Identifier(potionId.toLowerCase());
+                var optPot = Registries.POTION.getOrEmpty(potActualId);
                 if(optPot.isEmpty()) return null;
                 var potion = optPot.get();
                 var potStack = Items.POTION.getDefaultStack();
-                potStack.set(DataComponentTypes.POTION_CONTENTS, new PotionContentsComponent(potion));
+                PotionUtil.setPotion(potStack, potion);
                 HoverEvent hover = new HoverEvent(HoverEvent.Action.SHOW_ITEM, new ItemStackContent(potStack));
                 var itemData = new ItemInlineData(potStack);
                 return new DataMatch(itemData, Style.EMPTY.withHoverEvent(hover));
