@@ -15,12 +15,12 @@ subprojects {
     loom {
         silentMojangMappingsLicense()
 
-        mixin {
-            // the default name includes both archivesName and the subproject, resulting in the platform showing up twice
-            // default: hexdebug-common-Common-refmap.json
-            // fixed:   hexdebug-common.refmap.json
-            defaultRefmapName = "${base.archivesName.get()}.refmap.json"
-        }
+//        mixin {
+//            // the default name includes both archivesName and the subproject, resulting in the platform showing up twice
+//            // default: hexdebug-common-Common-refmap.json
+//            // fixed:   hexdebug-common.refmap.json
+//            defaultRefmapName = "${archivesBaseName}.refmap.json"
+//        }
     }
 
     dependencies {
